@@ -22,4 +22,10 @@ class Penumpang extends Model
         // dari model "Book" melalui fk "author_id"
         return $this->belongsTo('App\Models\Kereta', 'kereta_id');
     }
+    public function transaksis()
+    {
+        // data model "Author" bisa memiliki banyak data
+        // dari model "Book" melalui fk "author_id"
+        return $this->hasMany('App\Models\Transaksi', 'penumpang_id');
+    }
 }

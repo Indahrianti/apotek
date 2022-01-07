@@ -26,6 +26,7 @@ class AsalController extends Controller
     public function create()
     {
         return view('asal.create');
+
     }
 
     /**
@@ -54,9 +55,10 @@ class AsalController extends Controller
      * @param  \App\Models\Asal  $asal
      * @return \Illuminate\Http\Response
      */
-    public function show(Asal $asal)
+    public function show($id)
     {
-        //
+        $asal = Asal::findOrFail($id);
+        return view('asal.show', compact('asal'));
     }
 
     /**
@@ -65,9 +67,10 @@ class AsalController extends Controller
      * @param  \App\Models\Asal  $asal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Asal $asal)
+    public function edit($id)
     {
-        //
+        $asal = Asal::findOrFail($id);
+        return view('asal.edit', compact('asal'));
     }
 
     /**
@@ -81,7 +84,7 @@ class AsalController extends Controller
     {
         //validasi data
         $validated = $request->validate([
-            'asal_brangkat' => 'required',
+            'asal_brangkat' => 'required'
         ]);
 
         $asal = Asal::findOrfail($id);

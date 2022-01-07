@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penumpang;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $transaksi = Transaksi::all();
+        return view('transaksi.index', compact('transaksi'));
+       
     }
 
     /**
@@ -24,7 +27,8 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $penumpang = Penumpang::all();
+        return view('transaksi.create', compact('penumpang'));   
     }
 
     /**
@@ -35,7 +39,14 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $transaksi = new Transaksi;
+        $transaksi->penumpang_id = $request->penumpang_id;
+        $transaksi->jumlah = $request->jumlah;
+        $transaksi->no_telp = $request->no_telp;
+        $transaksi->total = $transaksi->jumlah * '150000';
+
+        $transaksi->save();
+        return redirect()->route('transaksi.index');
     }
 
     /**
@@ -67,9 +78,16 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaksi $transaksi)
+    public function update(Request $request, $id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->penumpang_id = $request->penumpang_id;
+        $transaksi->jumlah = $request->jumlah;
+        $transaksi->no_telp = $request->no_telp;
+        $transaksi->total = $request->total;
+
+        $transaksi->save();
+        return redirect()->route('transaksi.index');
     }
 
     /**
@@ -78,8 +96,10 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaksi $transaksi)
+    public function destroy($id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->delete();
+        return redirect()->route('transaksi.index');
     }
 }

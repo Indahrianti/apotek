@@ -17,8 +17,7 @@ class PenumpangController extends Controller
     {
          $penumpang = Penumpang::all();
          return view('penumpang.index', compact('penumpang'));
-        // $penumpang = Penumpang::all();
-        // return view('penumpang.index', compact('penumpang'));
+        
     }
 
     /**
@@ -50,14 +49,6 @@ class PenumpangController extends Controller
         $penumpang->save();
         return redirect()->route('penumpang.index');
 
-       /* $this->validate($request, ['nama_pel' => 'required|unique:penumpang']);
-        $penumpang = Penumpang::create($request->only('nama_pel'));
-
-        Session::flash("flash_notification", [
-            "level"=>"succes",
-            "message"=>"Berhasil menyimpan $penumpang->nama_pel"
-        ]);
-        return redirect()->route('penumpang.index'); */
     }
 
     /**
@@ -66,9 +57,10 @@ class PenumpangController extends Controller
      * @param  \App\Models\Penumpang  $penumpang
      * @return \Illuminate\Http\Response
      */
-    public function show(Penumpang $penumpang)
+    public function show( $id)
     {
-
+        $penumpang = Penumpang::findOrFail($id);
+        return view('penumpang.show', compact('penumpang'));
     }
 
     /**

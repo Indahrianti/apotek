@@ -25,7 +25,8 @@ class TujuanController extends Controller
      */
     public function create()
     {
-        //
+        return view('tujuan.create');
+
     }
 
     /**
@@ -36,7 +37,16 @@ class TujuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'tujuan_brangkat' => 'required'
+        ]);
+
+        $tujuan = new Tujuan;
+        //db              create
+        $tujuan->tujuan_brangkat = $request->tujuan_brangkat;
+        $tujuan->save();
+        return redirect()->route('tujuan.index');
     }
 
     /**
@@ -45,9 +55,10 @@ class TujuanController extends Controller
      * @param  \App\Models\Tujuan  $tujuan
      * @return \Illuminate\Http\Response
      */
-    public function show(Tujuan $tujuan)
+    public function show($id)
     {
-        //
+        $tujuan = Tujuan::findOrFail($id);
+        return view('tujuan.show', compact('tujuan'));
     }
 
     /**
@@ -56,9 +67,10 @@ class TujuanController extends Controller
      * @param  \App\Models\Tujuan  $tujuan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tujuan $tujuan)
+    public function edit($id)
     {
-        //
+        $tujuan = Tujuan::findOrFail($id);
+        return view('tujuan.edit', compact('tujuan'));
     }
 
     /**
@@ -68,9 +80,17 @@ class TujuanController extends Controller
      * @param  \App\Models\Tujuan  $tujuan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tujuan $tujuan)
+    public function update(Request $request,$id)
     {
-        //
+        //validasi data
+        $validated = $request->validate([
+            'tujuan_brangkat' => 'required'
+        ]);
+
+        $tujuan = Tujuan::findOrfail($id);
+        $tujuan->tujuan_brangkat = $request->tujuan_brangkat;
+        $tujuan->save();
+        return redirect()->route('tujuan.index');
     }
 
     /**

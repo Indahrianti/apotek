@@ -13,7 +13,7 @@ Dashboard
     <div class="card">
         <div class="card-header">
             Data Asal
-            <a href="{{ route('asal.create')}}" class="btn btn-primary float-right">Tambah</a>
+            <a href="{{ route('kereta.create')}}" class="btn btn-primary float-right">Tambah</a>
         </div>
         <!-- /.card-heading -->
         <div class="card-body">
@@ -44,8 +44,8 @@ Dashboard
                                                         @method('delete')
                                                         @csrf
 
-                                                    <a href="{{route('kereta.edit',$data->id)}}" class="btn btn-success float-right">Ubah</a>
-                                                    <a href="{{route('kereta.show',$data->id)}}" class="btn btn-warning float-right">Tampil</a>
+                                                    <a href="{{route('kereta.edit',$data->id)}}" class="btn btn-success">Ubah</a>
+                                                    <a href="{{route('kereta.show',$data->id)}}" class="btn btn-warning">Tampil</a>
                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin menghapus ini?');">Delete</button>
                                                     </form>
                                                 </td>

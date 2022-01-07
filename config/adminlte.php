@@ -270,6 +270,11 @@ return [
             'url'  => 'admin/tujuan',
             'icon'  => 'far fa-fw fa-file',
         ],
+        [
+            'text' => 'Transaksi',
+            'url'  => 'admin/transaksi',
+            'icon'  => 'far fa-fw fa-file',
+        ],
 
         ],
 

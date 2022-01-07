@@ -14,7 +14,7 @@ Dashboard
     <div class="card">
         <div class="card-header">
             Data Asal
-            <a href="{{ route('penumpang.create')}}" class="btn btn-primary float-right">Tambah</a>
+            <a href="{{ route('transaksi.create')}}" class="btn btn-primary float-right">Tambah</a>
         </div>
         <!-- /.card-heading -->
         <div class="card-body">
@@ -24,31 +24,30 @@ Dashboard
                         <tr>
                             <th>No</th>
                             <th>Nama Penumpang</th>
-                            <th>Kereta Id</th>
-                            <th>Asal Berangkat</th>
-                            <th>Tujuan Berangkat</th>
-                            <th>kelas</th>
+                            <th>jumlah</th>
+                            <th>no telepon</th>
+                            <th>total</th>
                             <th>Action</th>
                         </t>
                     </thead>
                     <tbody>
                         @php $no=1; @endphp
-                        @foreach($penumpang as $data)
+                        @foreach($transaksi as $data)
 
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $data->nama_penumpang}}</td>
-                            <td>{{ $data->keretas->nama_KA}}</td>
-                            <td>{{ $data->asal}}</td>
-                            <td>{{ $data->tujuan}}</td>
-                            <td>{{ $data->kelas}}</td>
+                            <td>{{ $data->penumpangs->nama_penumpang}}</td>
+                            <td>{{ $data->jumlah}}</td>
+                            <td>{{ $data->no_telp}}</td>
+                            <td>{{ $data->total}}</td>
                             <td>
 
-                                <form action="{{route('penumpang.destroy', $data->id)}}" method="post">
+                                <form action="{{route('transaksi.destroy', $data->id)}}" method="post">
                                 @method('delete')
                                 @csrf
 
-                                <a href="{{route('penumpang.show',$data->id)}}" class="btn btn-warning">Tampil</a>
+                                <a href="{{route('transaksi.edit',$data->id)}}" class="btn btn-success">Ubah</a>
+                                <a href="{{route('transaksi.show',$data->id)}}" class="btn btn-warning">Tampil</a>
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin menghapus ini?');">Delete</button>
                                     </form>
                                 </td>

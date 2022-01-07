@@ -28,7 +28,7 @@ class KeretaController extends Controller
      */
     public function create()
     {
-        $asal = Asal::all();
+         $asal = Asal::all();
         $tujuan = Tujuan::all();
 
         return view('kereta.create', compact('asal','tujuan'));
@@ -42,10 +42,10 @@ class KeretaController extends Controller
      */
     public function store(Request $request)
     {
-        //validasi data
-        $validated = $request->validate([
-            'nama_KA' => 'required'
-        ]);
+        // //validasi data
+         $validated = $request->validate([
+             'nama_KA' => 'required'
+         ]);
 
         $kereta = new Kereta;
         //db              create
@@ -86,9 +86,18 @@ class KeretaController extends Controller
      * @param  \App\Models\Kereta  $kereta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kereta $kereta)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama_KA' => 'required'
+        ]);
+
+        $kereta = Kereta::findOrfail($id);
+        $kereta->nama_KA = $request->nama_KA;
+        $kereta->asal_id = $request->asal_id;
+        $kereta->tujuan_id = $request->tujuan_id;
+        $kereta->save();
+        return redirect()->route('asal.index');
     }
 
     /**
